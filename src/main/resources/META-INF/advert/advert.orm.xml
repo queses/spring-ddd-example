@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+    <entity class="com.qss.adddvert.advert.model.Advert" access="FIELD">
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="status">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <element-collection name="oldPrices"/>
+        </attributes>
+    </entity>
+    
+    <embeddable class="com.qss.adddvert.advert.model.AdPrice" access="FIELD">
+        <attributes>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="com.qss.adddvert.advert.model.PriceLiquid" access="FIELD">
+        <attributes>
+            <basic name="assignedAt">
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="com.qss.adddvert.advert.model.AdContact" access="FIELD">
+        <attributes>
+            <element-collection name="phoneNumbers"/>
+        </attributes>
+    </embeddable>
+
+    <embeddable class="com.qss.adddvert.advert.model.PhoneNumber" access="FIELD">
+    </embeddable>
+</entity-mappings>

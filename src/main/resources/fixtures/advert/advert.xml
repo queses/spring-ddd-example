@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="ratt">
+        <!-- Advert #1 -->
+        <insert tableName="advert">
+            <column name="id">1</column>
+            <column name="title">The fisrt cooooool advert</column>
+
+            <column name="contact_email">advert1@gmail.com</column>
+
+            <column name="price_value">33.3</column>
+            <column name="price_liquid_value">2</column>
+            <column name="price_liquid_assignedat">2019-01-15 13:19:08</column>
+        </insert>
+
+        <insert tableName="advert_contact_phonenumbers">
+            <column name="advert_id">1</column>
+            <column name="contact_phonenumbers_number">89825365055</column>
+            <column name="contact_phonenumbers_description">Основной</column>
+        </insert>
+
+        <insert tableName="advert_contact_phonenumbers">
+            <column name="advert_id">1</column>
+            <column name="contact_phonenumbers_number">332211</column>
+            <column name="contact_phonenumbers_description">Домашний</column>
+        </insert>
+
+        <insert tableName="advert_oldprices">
+            <column name="advert_id">1</column>
+            <column name="oldprices_value">44.4</column>
+            <column name="oldprices_liquid_value">3</column>
+            <column name="oldprices_liquid_assignedat">2019-01-15 13:19:08</column>
+        </insert>
+
+        <insert tableName="advert_oldprices">
+            <column name="advert_id">1</column>
+            <column name="oldprices_value">55.5</column>
+            <column name="oldprices_liquid_value">3</column>
+            <column name="oldprices_liquid_assignedat">2019-01-15 13:19:08</column>
+        </insert>
+
+        <rollback>
+            <delete tableName="advert_oldprices"/>
+            <delete tableName="advert_contact_phonenumbers"/>
+            <delete tableName="advert"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
+

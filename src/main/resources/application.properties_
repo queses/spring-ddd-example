@@ -1,0 +1,16 @@
+# http://localhost:8080/h2-console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2c
+
+# JPA Config
+#spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.mapping-resources=[META-INF/advert/orm.xml]
+
+# H2 Config
+spring.datasource.driver-class-name=org.h2.Driver
+#spring.datasource.url=jdbc:h2:file:~/h2db
+spring.datasource.url=jdbc:h2:mem:h2db
+spring.datasource.username=h2user
+spring.datasource.password=h2pass

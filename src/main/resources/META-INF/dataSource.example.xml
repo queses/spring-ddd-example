@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+    <bean id="hibernateJpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaDialect" ref="hibernateJpaDialect" />
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+
+        <property name="packagesToScan" value="com.qss.adddvert" />
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.naming.implicit-strategy"
+                       value="org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl"/>
+                <entry key="hibernate.naming.physical-strategy"
+                       value="org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"/>
+            </map>
+        </property>
+
+        <property name="mappingResources">
+            <value>META-INF/advert/advert.orm.xml</value>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${spring.datasource.url}" />
+        <property name="username" value="${spring.datasource.username}" />
+        <property name="password" value="${spring.datasource.password}" />
+    </bean>
+
+</beans>

@@ -1,0 +1,31 @@
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+spring:
+#  profiles:
+#    active: prod
+  h2:
+    console:
+      enabled: true
+      path: /h2c
+  jpa:
+    hibernate:
+#      ddl-auto: create
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    mapping-resources:
+      - META-INF/advert/advert.orm.xml
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:h2db
+    username: h2user
+    password: h2pass
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+  liquibase:
+    enabled: false
+  jackson:
+    # https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+    date-format: dd-MM-yyyy HH:mm:ss
