@@ -26,18 +26,18 @@ public class AdvertController {
     @Autowired
     ValidationExceptionPresenter validationExceptionPresenter;
 
-    @GetMapping("/advert/test")
+    @GetMapping("/api/dummy/advert")
     public Iterable<Advert> testList(Pageable pageable) {
         return advertRepo.findAll(pageable).getContent();
     }
 
-    @PostMapping("/advert/test")
+    @PostMapping("/api/dummy/advert")
     public Advert testCreate(@RequestBody Advert advert) throws Exception {
         advertRepo.save(advert);
         return advert;
     }
 
-    @PostMapping(value = "/advert/test/add-phone")
+    @PostMapping(value = "/api/dummy/advert/add-phone")
     public PhoneNumber testAddPhone(@RequestBody PhoneNumber phoneNumber) throws Exception {
         return phoneNumber;
     }
@@ -47,14 +47,6 @@ public class AdvertController {
         return new ResponseEntity<>(
                 validationExceptionPresenter.getMessages(ex),
                 HttpStatus.BAD_REQUEST
-        );
-    }
-
-    private Advert createDefaultAdvert(String title) throws Exception {
-        return new Advert(
-                title,
-                new AdContact(new PhoneNumber("89825365088", "Main phone"), "contact@me.com"),
-                new AdPrice(33.33, PriceLiquid.create(2))
         );
     }
 }

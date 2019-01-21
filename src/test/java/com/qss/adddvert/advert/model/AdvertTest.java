@@ -50,10 +50,10 @@ public class AdvertTest {
     public void phoneNumShouldBeValidated() throws Exception {
         Advert advert = createDefaultAdvert();
         AdContact oldContact = advert.getContact();
-        advert.setContact(oldContact.addPhone(new PhoneNumber("33221")));
+        advert.setContact(oldContact.addPhone(PhoneNumber.create("33221")));
         assertThatThrownBy(() -> advertRepo.save(advert)).isInstanceOf(TransactionSystemException.class);
 
-        advert.setContact(oldContact.addPhone(new PhoneNumber("332211")));
+        advert.setContact(oldContact.addPhone(PhoneNumber.create("332211")));
         assertThatCode(() -> advertRepo.save(advert)).doesNotThrowAnyException();
     }
 
