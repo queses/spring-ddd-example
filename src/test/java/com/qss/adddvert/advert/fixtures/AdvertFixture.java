@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class AdvertFixture implements Fixture {
     @Override
     public String dataPath() {
-        return "fixtures/advert/advert.xml";
+        return "fixtures/advert/advert.liquibase.xml";
     }
 }

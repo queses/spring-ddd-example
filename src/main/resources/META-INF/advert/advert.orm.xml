@@ -3,7 +3,7 @@
     <entity class="com.qss.adddvert.advert.model.Advert" access="FIELD">
         <attributes>
             <id name="id">
-                <generated-value strategy="AUTO"/>
+                <generated-value strategy="SEQUENCE"/>
             </id>
             <basic name="status">
                 <enumerated>STRING</enumerated>

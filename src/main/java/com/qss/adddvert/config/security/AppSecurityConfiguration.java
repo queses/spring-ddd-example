@@ -34,6 +34,8 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        this.allowH2Console(httpSecurity);
+
         httpSecurity
                 .csrf().ignoringAntMatchers("/api/**").and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -47,7 +49,6 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .addFilter(new JwtAuthorizationFilter(authenticationManager()));
 
-        this.allowH2Console(httpSecurity);
         this.configureModules(httpSecurity);
     }
 

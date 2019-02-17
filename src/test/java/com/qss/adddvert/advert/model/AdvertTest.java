@@ -1,18 +1,22 @@
 package com.qss.adddvert.advert.model;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.qss.adddvert.advert.fixtures.AdvertFixture;
 import com.qss.adddvert.advert.repo.AdvertRepo;
 import com.qss.adddvert.core.test.fixture.FixtureLoader;
+import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.TransactionSystemException;
-
-import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -20,22 +24,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
+@DatabaseSetup("/fixtures/advert/advert.xml")
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 public class AdvertTest {
     @Autowired
     private AdvertRepo advertRepo;
-    @Autowired
-    private FixtureLoader fixtureLoader;
-    @Autowired
-    private AdvertFixture advertFixture;
 
-    @Before
-    public void loadFixtures() throws Exception {
-        fixtureLoader.load(advertFixture);
-    }
-
-    @After
-    public void unloadFixtures() throws Exception {
-        fixtureLoader.unload(advertFixture);
+    @Test
+    public void advertShouldBeCreated() throws Exception {
+        Advert advert = this.createDefaultAdvert("Great advert but with no name");
+        assertThat(advert.getTitle()).isEqualTo("Great advert but with no name");
     }
 
     @Test
@@ -44,6 +43,18 @@ public class AdvertTest {
         advertRepo.save(advert);
 
         assertThat(advertRepo.count()).isGreaterThan(0);
+    }
+
+    @Test
+    public void manyAdvertsShouldBePersisted() throws Exception {
+        Advert advert1 = createDefaultAdvert("Advert to save, number one");
+        advertRepo.save(advert1);
+        Advert advert2 = createDefaultAdvert("Advert to save, number two");
+        advertRepo.save(advert2);
+        Advert advert3 = createDefaultAdvert("Advert to save, number three");
+        advertRepo.save(advert3);
+
+        assertThat(advertRepo.count()).isGreaterThan(2);
     }
 
     @Test
