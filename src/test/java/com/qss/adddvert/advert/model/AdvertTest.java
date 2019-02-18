@@ -2,12 +2,7 @@ package com.qss.adddvert.advert.model;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.qss.adddvert.advert.fixtures.AdvertFixture;
-import com.qss.adddvert.advert.repo.AdvertRepo;
-import com.qss.adddvert.core.test.fixture.FixtureLoader;
-import org.hibernate.SessionFactory;
-import org.junit.After;
-import org.junit.Before;
+import com.qss.adddvert.advert.repo.AdvertRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 public class AdvertTest {
     @Autowired
-    private AdvertRepo advertRepo;
+    private AdvertRepository advertRepo;
 
     @Test
     public void advertShouldBeCreated() throws Exception {

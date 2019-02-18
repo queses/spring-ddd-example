@@ -1,19 +1,18 @@
 package com.qss.adddvert.advert;
 
 import com.qss.adddvert.advert.model.*;
-import com.qss.adddvert.advert.repo.AdvertRepo;
+import com.qss.adddvert.advert.repo.AdvertRepository;
 import com.qss.adddvert.core.ModuleRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 
 @Component
 public class AdvertDevModule implements ModuleRegistrar {
     @Autowired
-    private AdvertRepo advertRepo;
+    private AdvertRepository advertRepo;
 
     @Override
     public void register() {
