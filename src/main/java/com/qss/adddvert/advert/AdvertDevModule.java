@@ -2,7 +2,7 @@ package com.qss.adddvert.advert;
 
 import com.qss.adddvert.advert.model.*;
 import com.qss.adddvert.advert.repo.AdvertRepository;
-import com.qss.adddvert.core.ModuleRegistrar;
+import com.qss.adddvert.core.ModuleRegisterer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 
 @Component
-public class AdvertDevModule implements ModuleRegistrar {
+public class AdvertDevModule implements ModuleRegisterer {
     @Autowired
     private AdvertRepository advertRepo;
 
